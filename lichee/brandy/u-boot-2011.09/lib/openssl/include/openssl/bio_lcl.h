@@ -1,0 +1,39 @@
+/*
+ * lib/openssl/include/openssl/bio_lcl.h
+ *
+ * Copyright (c) 2016 Allwinnertech Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ */
+#include "bio.h"
+
+#if BIO_FLAGS_UPLINK==0
+/* Shortcut UPLINK calls on most platforms... */
+#define	UP_stdin	stdin
+#define	UP_stdout	stdout
+#define	UP_stderr	stderr
+#define	UP_fprintf	fprintf
+#define	UP_fgets	fgets
+#define	UP_fread	fread
+#define	UP_fwrite	fwrite
+#undef	UP_fsetmod
+#define	UP_feof		feof
+#define	UP_fclose	fclose
+
+#define	UP_fopen	fopen
+#define	UP_fseek	fseek
+#define	UP_ftell	ftell
+#define	UP_fflush	fflush
+#define	UP_ferror	ferror
+#define	UP_fileno	fileno
+
+#define	UP_open		open
+#define	UP_read		read
+#define	UP_write	write
+#define	UP_lseek	lseek
+#define	UP_close	close
+#endif

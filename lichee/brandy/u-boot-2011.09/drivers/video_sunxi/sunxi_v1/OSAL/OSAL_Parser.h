@@ -1,0 +1,20 @@
+/*
+ * drivers/video_sunxi/sunxi_v1/OSAL/OSAL_Parser.h
+ *
+ * Copyright (c) 2016 Allwinnertech Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ */
+#ifndef  __OSAL_PARSER_H__
+#define  __OSAL_PARSER_H__
+
+#include "OSAL.h"
+
+int OSAL_Script_FetchParser_Data(char *main_name, char *sub_name, int value[], int count);
+int OSAL_sw_get_ic_ver(void);
+
+#endif

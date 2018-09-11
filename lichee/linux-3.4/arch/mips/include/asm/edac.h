@@ -1,0 +1,45 @@
+/*
+ * arch/mips/include/asm/edac.h
+ *
+ * Copyright (c) 2016 Allwinnertech Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ */
+#ifndef ASM_EDAC_H
+#define ASM_EDAC_H
+
+/* ECC atomic, DMA, SMP and interrupt safe scrub function */
+
+static inline void atomic_scrub(void *va, u32 size)
+{
+	unsigned long *virt_addr = va;
+	unsigned long temp;
+	u32 i;
+
+	for (i = 0; i < size / sizeof(unsigned long); i++) {
+		/*
+		 * Very carefully read and write to memory atomically
+		 * so we are interrupt, DMA and SMP safe.
+		 *
+		 * Intel: asm("lock; addl $0, %0"::"m"(*virt_addr));
+		 */
+
+		__asm__ __volatile__ (
+		"	.set	mips2					\n"
+		"1:	ll	%0, %1		# atomic_scrub		\n"
+		"	addu	%0, $0					\n"
+		"	sc	%0, %1					\n"
+		"	beqz	%0, 1b					\n"
+		"	.set	mips0					\n"
+		: "=&r" (temp), "=m" (*virt_addr)
+		: "m" (*virt_addr));
+
+		virt_addr++;
+	}
+}
+
+#endif

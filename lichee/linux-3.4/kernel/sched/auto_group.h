@@ -1,0 +1,70 @@
+/*
+ * kernel/sched/auto_group.h
+ *
+ * Copyright (c) 2016 Allwinnertech Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ */
+#ifdef CONFIG_SCHED_AUTOGROUP
+
+#include <linux/kref.h>
+#include <linux/rwsem.h>
+
+struct autogroup {
+	struct kref		kref;
+	struct task_group	*tg;
+	struct rw_semaphore	lock;
+	unsigned long		id;
+	int			nice;
+};
+
+extern void autogroup_init(struct task_struct *init_task);
+extern void autogroup_free(struct task_group *tg);
+
+static inline bool task_group_is_autogroup(struct task_group *tg)
+{
+	return !!tg->autogroup;
+}
+
+extern bool task_wants_autogroup(struct task_struct *p, struct task_group *tg);
+
+static inline struct task_group *
+autogroup_task_group(struct task_struct *p, struct task_group *tg)
+{
+	int enabled = ACCESS_ONCE(sysctl_sched_autogroup_enabled);
+
+	if (enabled && task_wants_autogroup(p, tg))
+		return p->signal->autogroup->tg;
+
+	return tg;
+}
+
+extern int autogroup_path(struct task_group *tg, char *buf, int buflen);
+
+#else /* !CONFIG_SCHED_AUTOGROUP */
+
+static inline void autogroup_init(struct task_struct *init_task) {  }
+static inline void autogroup_free(struct task_group *tg) { }
+static inline bool task_group_is_autogroup(struct task_group *tg)
+{
+	return 0;
+}
+
+static inline struct task_group *
+autogroup_task_group(struct task_struct *p, struct task_group *tg)
+{
+	return tg;
+}
+
+#ifdef CONFIG_SCHED_DEBUG
+static inline int autogroup_path(struct task_group *tg, char *buf, int buflen)
+{
+	return 0;
+}
+#endif
+
+#endif /* CONFIG_SCHED_AUTOGROUP */

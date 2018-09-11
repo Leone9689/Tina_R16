@@ -1,0 +1,36 @@
+/*
+ * board/bf533-stamp/video.h
+ *
+ * Copyright (c) 2016 Allwinnertech Co., Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ */
+#include <video_logo.h>
+#define write_dest_byte(val) {*dest++=val;}
+#define BLACK   (0x01800180)	/* black pixel pattern   */
+#define BLUE    (0x296E29F0)	/* blue pixel pattern    */
+#define RED     (0x51F0515A)	/* red pixel pattern     */
+#define MAGENTA (0x6ADE6ACA)	/* magenta pixel pattern */
+#define GREEN   (0x91229136)	/* green pixel pattern   */
+#define CYAN    (0xAA10AAA6)	/* cyan pixel pattern    */
+#define YELLOW  (0xD292D210)	/* yellow pixel pattern  */
+#define WHITE   (0xFE80FE80)	/* white pixel pattern   */
+
+#define true	1
+#define false	0
+
+typedef struct {
+	unsigned int sav;
+	unsigned int eav;
+} system_code_type;
+
+const system_code_type system_code_map[] = {
+	{ 0xFF000080, 0xFF00009D },
+	{ 0xFF0000AB, 0xFF0000B6 },
+	{ 0xFF0000C7, 0xFF0000DA },
+	{ 0xFF0000EC, 0xFF0000F1 },
+};
