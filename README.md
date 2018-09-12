@@ -1,4 +1,9 @@
 # Tina_R16
-1.配置环境
-
-<code>source build/envsetup.sh</code>
+## 1.配置环境
+`source build/envsetup.sh`
+## 2.加载板子配置
+`lunch astar_parrot-tina`
+## 3.编译
+`make -j1`
+## 4.打包
+`pack -d`
