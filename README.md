@@ -19,7 +19,9 @@
 `tar -xvf openssl-secure-system.tar.bz2`
 
 `cd openssl-1.0.1g-for-secure-system/openssl-1.0.1g`
->编辑Makefile,修改276行、277行修改为
+
+编辑Makefile,修改276行、277行修改为
+
 `cp -v libssl.a ~/Tina_R16/lichee/brandy/gcc-linaro/lib/gcc/arm-linux-gnueabi/4.6.3/libssl.a`
 
 `cp -v libcrypto.a ~/Tina_R16/lichee/brandy/gcc-linaro/lib/gcc/arm-linux-gnueabi/4.6.3/libcrypto.a`
