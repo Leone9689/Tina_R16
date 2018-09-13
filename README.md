@@ -18,3 +18,4 @@
 `make sun8iw5p1_config`
 ## 3.编译
 `make -j1`
+编译会提醒找不到 -lssl 和-lcrypto，问题在交叉编译器缺少动态连接库ssl.so和crypto.so。
