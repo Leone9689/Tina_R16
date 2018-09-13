@@ -5,7 +5,7 @@
 ***
 [TOC]
 
-####***一. 开发流程***
+#### ***一. 开发流程***
   1. 构建linux系统编译环境（软件和硬件）
   2. 下载R40 Tina Linux软件包
   3. 对下载的软件包进行配置、编译和打包
@@ -46,7 +46,7 @@
 	* 启动minicom进行配置（端口：ttyUSB0、波特率：115200 8N1、连接类型：serial、	Hardware Flow Control 设 为 NO)
 	* 按下开发板上uboot按键不要松开，再按一下reset按键，PC机上会提示：是否格式化数据分区？选择Yes或No都可以。然后其自动烧写镜像到开发板，在minicom上可以看到具体过程，等待烧写完成
 
-####***二. Tina Linux Sdk目录结构***
+#### ***二. Tina Linux Sdk目录结构***
 
 Tina Linux SDK主要由构建系统、配置工具、工具链、host工具包、目标机功能包、文档、脚本、linux内核、bootloader组成。
 [点击查看Tina结构图](https://www.processon.com/view/link/58d86685e4b03e064c7b8c34)
@@ -166,10 +166,10 @@ tools目录下存放的是host端工具的编译规则
 最后整理一下Makefile的结构，仅供参考：
 [Tina Makefile](https://www.processon.com/view/link/58d88239e4b03eea78334943)
 
-####***三. 编译系统的内部工作原理之构建系统工作流程***
+#### ***三. 编译系统的内部工作原理之构建系统工作流程***
 ![](http://p1.bqimg.com/567571/743537a96715fa38.png)
 
-####***四. Tina系统的 makefile简要分析***
+#### ***四. Tina系统的 makefile简要分析***
   * ***Tina - Makefile结构图***
 ![](https://www.processon.com/chart_image/58d8aebee4b045831853d0c0.png)
 
@@ -194,12 +194,12 @@ tools目录下存放的是host端工具的编译规则
 **tools/Makefile : ** 定义生成主机端工具编译规则，编译时获取和编译这些工具
 **toolchain/Makefile : ** 利用工具链源码生成工具链
 
-####***五. adb简介和使用***
+#### ***五. adb简介和使用***
 
-#####5.1 adb简介
+##### 5.1 adb简介
   * adb全称Android Debug Bridge，对于PC和手机.平板.开发板之间，起到调试桥的作用。借助adb工具， 我们可以对设备进行管理，还可以进行很多操作，比如运行shell命令,向开发板发送文件等。
 
-#####5.2 adb的安装和配置
+##### 5.2 adb的安装和配置
   * adb的安装
   	* $sudo apt-get install android-tools-adb
   * adb的配置
@@ -219,48 +219,48 @@ tools目录下存放的是host端工具的编译规则
   	  - adb devices
   运行完成之后即可看见设备清单，如下：![](http://i4.buimg.com/567571/753ec38177efd46d.png)
 
-#####5.3 adb的使用
+##### 5.3 adb的使用
   * adb的主要命令如下：
-  	#####**adb devices**
+##### **adb devices**
  	 - 说明：查看当前连接的设备， 连接到计算机的设备或者模拟器将会列出显示
  	 - adb start-server
  	 - 说明：启动adb
 
-	#####adb kill-server
+##### adb kill-server
   	 - 说明：关闭adb
 
-    #####adb shell
+##### adb shell
 	  - 说明：这个命令将登录设备的shell, 后面加直接运行设备命令， 相当于执行远程命令
 
-    #####adb push
+##### adb push
  	  - 说明：此命令可以把电脑上的文件复制到开发板上
  	  - 举例： adb push hello.c /tmp/ 这样就把电脑上的hello.c文件复制到了开发板上的/tmp目录下
 
-	#####adb pull
+##### adb pull
 	  -	说明：此命令可以把开发板上的文件复制到电脑上
 	  - 举例： adb pull /tmp/hello.c ./ 将开发板上/tmp目录下的文件hello.c复制到当前目录
 
-    #####adb version
+##### adb version
 	  - 说明：查看adb的版本
 
-	#####adb help
+##### adb help
 	  - 说明：adb的帮助，有关更多命令详情，请使用adb help命令查看
 
 
-####***六. 编写程序在开发板上运行***
+#### ***六. 编写程序在开发板上运行***
 
-  #####6.1 准备:
+##### 6.1 准备:
   - 首先将开发软件的工具链的所在目录添加进环境变量里。对于Tina系统来说，其arm工具链在tina/prebuilt/gcc/linux-x86/arm/toolchain-sunxi/toolchain/bin目录下。然后在自己的用户目录下打开.bashrc文件，在这个文件的最后面添加一句话，如下：
   export PATH=$PATH:/home/xxxxx/tina/prebuilt/gcc/linux-x86/arm/toolchain-sunxi/toolchain/bin
   保存后退出，然后注销系统，重新登录。登录之后在终端里输入命令env查看一下PATH变量里是否包含此目录，若包含则添加成功。
 
-#####6.2 应用程序：
+##### 6.2 应用程序：
   1. 编写一个简单的hello world程序
   2. 用交叉工具链里的arm-openwrt-linux-gcc对其进行编译
   3. 通过adb下载到开发板上，然后运行
 
-#####6.3 驱动程序：
-  ######6.3.1 动态加载驱动程序
+##### 6.3 驱动程序：
+###### 6.3.1 动态加载驱动程序
   1. 编写一个驱动模块，其内容如下：
   ![](http://i2.buimg.com/567571/7caa6a0a55430e99.png)
   2. 编写相应的Makefile，其内容如下：
@@ -273,7 +273,7 @@ tools目录下存放的是host端工具的编译规则
 - rmmod hello
 
 
-######6.3.2 静态加载驱动程序
+###### 6.3.2 静态加载驱动程序
   1. 在tina/lichee/linux-3.10/drivers/char/目录下创建一个hello目录
   2. cd hello，然后编写一个驱动模块，其内容和上面一样。
   3. 创建一个Makefile文件，向里面写入如下内容，保存退出
