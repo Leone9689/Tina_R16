@@ -1,21 +1,21 @@
 # Tina_R16
 `git clone https://github.com/joofee/Tina_R16.git`
 
-1.配置环境
+配置环境
 
 `cd ~/Tina_R16`
 
 `source build/envsetup.sh`
 
-2.加载板子配置
+加载板子配置
 
 `lunch astar_parrot-tina`
 
-3.编译
+编译
 
 `make -j1`
 
-4.打包
+打包
 
 `pack -d`
 
@@ -39,11 +39,16 @@
 `make build_libs -j`
 
 # 编译u-boot
-## 1.进入u-boot目录
+进入u-boot目录
+
 `cd ~/Tina_R16/lichee/brandy/u-boot-2011.09`
-## 2.加载配置文件
+
+加载配置文件
+
 `make sun8iw5p1_config`
-## 3.编译
+
+编译
+
 `make -j1`
 
 >编译会提醒找不到 -lssl 和-lcrypto，问题在交叉编译器缺少动态连接库ssl.so和crypto.so，说明openssl未编译。
