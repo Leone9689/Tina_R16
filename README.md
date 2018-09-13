@@ -43,6 +43,10 @@
 
 `cd ~/Tina_R16/lichee/brandy/u-boot-2011.09`
 
+清除编译残留
+
+`make distclean`
+
 加载配置文件
 
 `make sun8iw5p1_config`
