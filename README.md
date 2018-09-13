@@ -1,14 +1,22 @@
 # Tina_R16
 `git clone https://github.com/joofee/Tina_R16.git`
-## 1.配置环境
+
+1.配置环境
+
 `cd ~/Tina_R16`
 
 `source build/envsetup.sh`
-## 2.加载板子配置
+
+2.加载板子配置
+
 `lunch astar_parrot-tina`
-## 3.编译
+
+3.编译
+
 `make -j1`
-## 4.打包
+
+4.打包
+
 `pack -d`
 
 # 添加交叉编译环境
