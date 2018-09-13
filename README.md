@@ -1,5 +1,5 @@
 # Tina_R16
-
+`git clone https://github.com/joofee/Tina_R16.git`
 ## 1.配置环境
 `cd ~/Tina_R16`
 
