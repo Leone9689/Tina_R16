@@ -51,20 +51,35 @@
 Tina Linux SDK主要由构建系统、配置工具、工具链、host工具包、目标机功能包、文档、脚本、linux内核、bootloader组成。
 [点击查看Tina结构图](https://www.processon.com/view/link/58d86685e4b03e064c7b8c34)
 Tina/
+
 ├── build
+
 ├── config
+
 ├── Config.in
+
 ├── dl
+
 ├── docs
+
 ├── lichee
+
 ├── Makefile
+
 ├── out
+
 ├── package
+
 ├── rules.mk
+
 ├── scripts
+
 ├── target
+
 ├── tmp
+
 ├── toolchain
+
 └── tools
 
 - build 目录
@@ -77,10 +92,15 @@ Tina/
     - 生成系统固件的生成规格
 - config 目录
 config/
+
 ├── Config-build.in
+
 ├── Config-devel.in
+
 ├── Config-images.in
+
 ├── Config-kernel.in
+
 └── top_config.in
 这里存放的都是用于菜单配置项的.in文件，当执行make menuconfig时发挥作用。这里简单介绍所有调用到的.in文件，仅供参考：
 [点击查看.in目录结构](https://www.processon.com/view/link/58d86b46e4b04583185077cb)
@@ -95,70 +115,126 @@ config/
     - target/toolchain/Config.in: 打包OpenWRT 基础工具链
 - docs 目录
 docs/
+
 ├── build.md
+
 ├── config.md
+
 ├── init-scripts.md
+
 ├── Makefile
+
 ├── network.md
+
 ├── tina.md
+
 ├── wireless.md
+
 └── working.md
+
 存放用于开发的文档，以markdown格式编写。后续不断完善。
 - lichee 目录
 lichee/
+
 ├── brandy
+
 │   ├── add_hash
+
 │   ├── add_hash.sh
+
 │   ├── arm-trusted-firmware-1.0
+
 │   ├── armv8_toolchain
+
 │   ├── basic_loader
+
 │   ├── build.sh
+
 │   ├── extern-libs
+
 │   ├── gcc-linaro
+
 │   ├── pack_tools
+
 │   ├── toolchain
+
 │   ├── u-boot-2011.09
+
 │   └── u-boot-2014.07
+
 ├── linux-3.10
+
 └── linux-3.4
+
 其中brandy目录用于存放bootloader,其中u-boot-2011.09用于存放R8/R16/R58的bootloader，u-boot-2014.07用于存放R18/R40的bootloader；linux-3.10是R18/R40使用的内核源码目录；linux-3.4是R8/R16/R58使用的内核源码目录。
 - package 目录
+
 package/
+
 ├── base-files
+
 ├── devel
+
 ├── firmware
+
 ├── kernel
+
 ├── libs
+
 ├── Makefile
+
 ├── network
+
 ├── system
+
 └── utils
+
 package 目录用于存放target机器上的软件包的源码和编译规格，目录按照目标软件包的功能进行分类。
 - scripts 目录
 scripts 目录用于存放pc端或者小机端使用的一些脚本
 - target 目录
 target/
+
 ├── allwinner
+
 ├── Config.in
+
 ├── imagebuilder
+
 ├── Makefile
+
 ├── sdk
+
 └── toolchain
+
 用于存放目标板相关的配置以及sdk和toolchain生成的规格
 - toolchain目录
 toolchain/
+
 ├── binutils
+
 ├── Config.in
+
 ├── fortify-headers
+
 ├── gcc
+
 ├── gdb
+
 ├── glibc
+
 ├── info.mk
+
 ├── insight
+
 ├── kernel-headers
+
 ├── Makefile
+
 ├── musl
+
 └── wrapper
+
 其中gcc目录为gcc编译器的编译规则目录，gdb为c／c++调试器编译规则目录，glibc目前没有启用，默认使用的是musl下的musl-libc
 - tools 目录
 tools目录下存放的是host端工具的编译规则
