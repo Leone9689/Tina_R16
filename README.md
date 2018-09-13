@@ -1,5 +1,8 @@
 # Tina_R16
+
 ## 1.配置环境
+`cd ~/Tina_R16`
+
 `source build/envsetup.sh`
 ## 2.加载板子配置
 `lunch astar_parrot-tina`
@@ -9,7 +12,7 @@
 `pack -d`
 
 # 添加交叉编译环境
-
+`export PATH=$PATH:~/Tina_R16/lichee/brandy/gcc-linaro/bin`
 
 # 编译u-boot
 ## 1.进入u-boot目录
@@ -19,4 +22,7 @@
 ## 3.编译
 `make -j1`
 
-编译会提醒找不到 -lssl 和-lcrypto，问题在交叉编译器缺少动态连接库ssl.so和crypto.so。
+>编译会提醒找不到 -lssl 和-lcrypto，问题在交叉编译器缺少动态连接库ssl.so和crypto.so。
+
+# 编译openssl
+
