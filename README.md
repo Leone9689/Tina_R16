@@ -26,6 +26,10 @@
 
 `cp -v libcrypto.a ~/Tina_R16/lichee/brandy/gcc-linaro/lib/gcc/arm-linux-gnueabi/4.6.3/libcrypto.a`
 
+保存退出
+
+`make build_libs -j`
+
 # 编译u-boot
 ## 1.进入u-boot目录
 `cd ~/Tina_R16/lichee/brandy/u-boot-2011.09`
